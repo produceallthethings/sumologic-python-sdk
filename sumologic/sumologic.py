@@ -207,8 +207,17 @@ class SumoLogic(object):
     def import_content(self, folder_id, content, is_overwrite="false"):
         return self.post('/content/folders/%s/import?overwrite=%s' % (folder_id, is_overwrite), params=content, version='v2')
 
+    def export_content(self, folder_id):
+        return self.post('/content/%s/export' % folder_id, params='', version='v2')
+
     def check_import_status(self, folder_id, job_id):
         return self.get('/content/folders/%s/import/%s/status' % (folder_id, job_id), version='v2')
+
+    def check_export_status(self, folder_id, job_id):
+        return self.get('/content/%s/export/%s/status' % (folder_id, job_id), version='v2')
+
+    def get_export_content_result(self, folder_id, job_id):
+        return self.get('/content/%s/export/%s/result' % (folder_id, job_id), version='v2')
 
     def get_folder(self, folder_id):
         return self.get('/content/folders/%s' % folder_id, version='v2')
